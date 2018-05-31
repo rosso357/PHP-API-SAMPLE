@@ -24,28 +24,34 @@ class CustomersController extends ControllerBase{
      * @param type $gender 作成者の性別
      * @return　顧客情報を保存
      */
-    public function registCustomers($name, $mail_address, $gender){
+    public function indexAction(){
+        echo "<h1>hello</h1>";
+    }
+
+
+    public function registCustomers($id, $name, $mail_address, $gender){
 
         //バリデーションチェック.
-        $validation = new validation();
-
-        $validation ->add($name, new PresenceOf(array(
-            'message' => 'お名前を入力してください。'
-        )));
-        $validation ->add($mail_address, new PresenceOf(array(
-            'message' => 'メールアドレスを入力してください。'
-        )));
-
-        $validation ->add($gender, new PresenceOf(array(
-            'message' => '性別を入力してください。'
-        )));
+//        $validation = new validation();
+//
+//        $validation ->add($name, new PresenceOf(array(
+//            'message' => 'お名前を入力してください。'
+//        )));
+//        $validation ->add($mail_address, new PresenceOf(array(
+//            'message' => 'メールアドレスを入力してください。'
+//        )));
+//
+//        $validation ->add($gender, new PresenceOf(array(
+//            'message' => '性別を入力してください。'
+//        )));
 
         //顧客情報を登録する.
         $customers = new Customers();
+        $customers ->setId($id);
         $customers ->setName($name);
         $customers ->setMailAddress($mail_address);
-        $customers ->set($gender);
-
+        $customers ->setGender($gender);
+        var_dump($customers);
         return $customers -> save();
     }
 
@@ -54,25 +60,8 @@ class CustomersController extends ControllerBase{
         $di = FactoryDefault::getDefault();
         return $di->get('db');
     }
+
 }
 
-
-//
-//$validation = new validation();
-//
-//$validation= array('name' => 'イガリ',
-//    'mail_address' => 'igari@gmail.com',
-//    'gender' => '1',
-//);
-//
-//$validation ->add('name', new PresenceOf(array(
-//    'message' => 'お名前を入力してください。'
-//)));
-//
-//$validation ->add('mail_address', new PresenceOf(array(
-//    'message' => 'メールアドレスを入力してください。'
-//)));
-//
-//$validation ->add('gender', new PresenceOf(array(
-//    'message' => '性別を入力してください。'
-//)));
+$start = new CustomersController();
+$start ->registCustomers(2, 'ほげ','mail@gmail.com',2);

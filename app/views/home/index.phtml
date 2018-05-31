@@ -1,0 +1,27 @@
+<h2>Sign up using this form</h2>
+<?php
+/**
+ * Created by IntelliJ IDEA.
+ * User: rosso357
+ * Date: 2018/05/30
+ * Time: 10:24
+ */
+
+
+    echo $this->tag->form("home/register"); ?>
+
+    <p>
+        <label for="name">Name</label>
+        <?php echo $this->tag->textField("name"); ?>
+    </p>
+
+    <p>
+        <label for="mail_address">E-Mail</label>
+        <?php echo $this->tag->textField("mail_address"); ?>
+    </p>
+
+    <p>
+        <?php echo $this->tag->submitButton("Register"); ?>
+    </p>
+
+</form>

@@ -9,34 +9,49 @@ use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 
 try {
 
-    // ƒI[ƒgƒ[ƒ_‚ÉƒfƒBƒŒƒNƒgƒŠ‚ğ“o˜^‚·‚é
+    // ï¿½Iï¿½[ï¿½gï¿½ï¿½ï¿½[ï¿½_ï¿½Éƒfï¿½Bï¿½ï¿½ï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½oï¿½^ï¿½ï¿½ï¿½ï¿½
     $loader = new Loader();
     $loader->registerDirs(array(
         '../app/controllers/',
         '../app/models/'
     ))->register();
 
-    // DIƒRƒ“ƒeƒi‚ğì‚é
+    // DIï¿½Rï¿½ï¿½ï¿½eï¿½iï¿½ï¿½ï¿½ï¿½ï¿½
     $di = new FactoryDefault();
 
-    // ƒrƒ…[‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg‚Ì‘g‚İ—§‚Ä
+    // ï¿½rï¿½ï¿½ï¿½[ï¿½ÌƒRï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½Ì‘gï¿½İ—ï¿½ï¿½ï¿½
     $di->set('view', function () {
         $view = new View();
         $view->setViewsDir('../app/views/');
         return $view;
     });
 
-    // ƒx[ƒXURI‚ğİ’è‚µ‚ÄA¶¬‚³‚ê‚é‘S‚Ä‚ÌURI‚ªuphalconv‚ğŠÜ‚Ş‚æ‚¤‚É‚·‚é
+    // ï¿½xï¿½[ï¿½XURIï¿½ï¿½İ’è‚µï¿½ÄAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Sï¿½Ä‚ï¿½URIï¿½ï¿½ï¿½uphalconï¿½vï¿½ï¿½ï¿½Ü‚Ş‚æ‚¤ï¿½É‚ï¿½ï¿½ï¿½
     $di->set('url', function () {
         $url = new UrlProvider();
         $url->setBaseUri('/phalcon-sample/');
         return $url;
     });
 
-    // ƒŠƒNƒGƒXƒg‚ğˆ—‚·‚é
-    $application = new Application($di);
 
     echo $application->handle()->getContent();
+
+    //ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã®æ¥ç¶šè¨­å®š
+    $di->set('db',
+        function (){
+            return new DbAdapter(
+                [
+                    'host' =>'localhost',
+                    'username' => 'root',
+                    'password' => 'iwsp731',
+                    'dbname'   => 'RubyBatch',
+                ]
+            );
+        }
+    );
+
+    // ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’å‡¦ç†ã™ã‚‹
+    $application = new Application($di);
 
 } catch (\Exception $e) {
      echo "Exception: ", $e->getMessage();

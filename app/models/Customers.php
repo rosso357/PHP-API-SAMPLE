@@ -6,8 +6,9 @@
  * Time: 15:19
  */
 
-use Phalcon\Di\FactoryDefault;
-class Customers
+use Phalcon\Mvc\Model;
+
+class Customers extends Model
 {
     //ユーザー名
     public $id;
@@ -23,24 +24,6 @@ class Customers
     /**
      * @return mixed
      */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param mixed $name
-     * @return Customers
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getId()
     {
         return $this->id;
@@ -53,6 +36,24 @@ class Customers
     public function setId($id)
     {
         $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     * @return Customers
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
         return $this;
     }
 
